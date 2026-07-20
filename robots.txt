@@ -1,4 +1,37 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /media/
+Allow: /googlee20c3ef1b30ef3ac.html
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /llms.txt
+Allow: /humans.txt
+Allow: /site.webmanifest
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
 
 Sitemap: https://www.keithfount.co.ke/sitemap.xml
+Host: https://www.keithfount.co.ke
