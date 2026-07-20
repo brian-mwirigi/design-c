@@ -501,7 +501,7 @@ if (serviceTriggers.length) {
         title: "Any site conditions we should know about?",
         sub: "Slope, drainage, existing trees, soil type, anything relevant. Optional.",
         optional: true,
-        placeholder: "Optional — leave blank if not sure",
+        placeholder: "Optional ï¿½ leave blank if not sure",
       },
     ],
     construction: [
