@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Enquiry Survey | Keith Fount Solutions Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  EMBEDDING NOTES
+  ----------------
+  This file is self-contained: all styles are scoped under .kfs- prefixes
+  and all script is wrapped in an IIFE, so it is safe to drop the contents
+  of <body> (the .kfs-shell block) plus this <style>/<script> pair straight
+  into an existing Keith Fount page (e.g. a new survey.html linked from
+  the "Enquire" nav item, or embedded inside contact.html above the form).
+  It reuses the same colour and type tokens as the live site's styles.css
+  (navy/gold palette, Cinzel/Cormorant Garamond/Montserrat) so it will sit
+  visually in line with the rest of keithfount.co.ke.
+
+  Where responses go: right now, "Submit enquiry" just shows a thank-you
+  screen and logs the answers to the console (see kfsCollectedAnswers).
+  Wire up the fetch() call marked TODO below to your form backend,
+  email service, or CRM endpoint to actually receive submissions.
+-->
+<style>
+  :root{
+    --kfs-navy:#050d1c;
+    --kfs-navy-2:#0a1628;
+    --kfs-navy-3:#122038;
+    --kfs-gold:#c9a43b;
+    --kfs-gold-bright:#e0bf5a;
+    --kfs-gold-deep:#9a7a28;
+    --kfs-white:#f5f2ea;
+    --kfs-white-dim:rgba(245,242,234,.68);
+    --kfs-line:rgba(201,164,59,.28);
+    --kfs-line-soft:rgba(245,242,234,.12);
+    --kfs-font-serif:"Cinzel","Times New Roman",serif;
+    --kfs-font-display:"Cormorant Garamond",Georgia,serif;
+    --kfs-font-body:"Montserrat",system-ui,sans-serif;
+    --kfs-ease:cubic-bezier(.22,1,.36,1);
+  }
+  .kfs-shell,.kfs-shell *{box-sizing:border-box;}
+  .kfs-shell{
+    min-height:100svh;
+    display:grid;
+    place-items:center;
+    padding:clamp(1.25rem,4vw,3rem);
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 20%, rgba(201,164,59,.10), transparent 60%),
+      var(--kfs-navy);
+    font-family:var(--kfs-font-body);
+    color:var(--kfs-white);
+  }
+  .kfs-card{
+    width:min(620px,100%);
+    border:1px solid var(--kfs-line);
+    background:linear-gradient(180deg,var(--kfs-navy-2) 0%,var(--kfs-navy) 100%);
+    box-shadow:0 24px 80px rgba(0,0,0,.45);
+    padding:clamp(1.5rem,4vw,2.75rem);
+    position:relative;
+    overflow:hidden;
+  }
+  .kfs-eyebrow{
+    display:flex;align-items:center;gap:.85rem;
+    font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--kfs-gold);margin-bottom:1.5rem;
+  }
+  .kfs-eyebrow::before,.kfs-eyebrow::after{content:"";height:1px;flex:0 0 1.75rem;background:linear-gradient(90deg,transparent,var(--kfs-gold),transparent);}
+  .kfs-progress-track{
+    height:2px;width:100%;background:var(--kfs-line-soft);margin-bottom:2rem;position:relative;
+  }
+  .kfs-progress-bar{
+    height:100%;width:0%;background:linear-gradient(90deg,var(--kfs-gold-deep),var(--kfs-gold-bright));
+    transition:width .45s var(--kfs-ease);
+  }
+  .kfs-step-label{
+    font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--kfs-white-dim);margin-bottom:.6rem;
+  }
+  .kfs-stage{min-height:220px;display:flex;flex-direction:column;}
+  .kfs-question{
+    opacity:0;transform:translateY(10px);
+    animation:kfs-in .5s var(--kfs-ease) forwards;
+  }
+  @keyframes kfs-in{to{opacity:1;transform:none;}}
+  .kfs-question h2{
+    font-family:var(--kfs-font-display);
+    font-weight:600;
+    font-size:clamp(1.5rem,3.4vw,2.1rem);
+    line-height:1.2;
+    margin:0 0 .5rem;
+    color:var(--kfs-white);
+  }
+  .kfs-question .kfs-sub{
+    color:var(--kfs-white-dim);
+    font-size:.92rem;
+    margin:0 0 1.5rem;
+    max-width:34rem;
+  }
+  .kfs-options{display:grid;gap:.6rem;margin-bottom:1.5rem;}
+  .kfs-option{
+    display:flex;align-items:center;gap:.75rem;
+    border:1px solid var(--kfs-line-soft);
+    background:rgba(18,32,56,.5);
+    padding:.9rem 1.05rem;
+    cursor:pointer;
+    text-align:left;
+    transition:border-color .25s var(--kfs-ease),background .25s var(--kfs-ease);
+    font-family:var(--kfs-font-body);
+    color:var(--kfs-white);
+  }
+  .kfs-option:hover{border-color:var(--kfs-line);background:rgba(18,32,56,.85);}
+  .kfs-option.is-selected{
+    border-color:var(--kfs-gold);
+    background:rgba(201,164,59,.1);
+  }
+  .kfs-option .kfs-mark{
+    flex:0 0 1.1rem;height:1.1rem;
+    border:1px solid var(--kfs-gold-deep);
+    display:grid;place-items:center;
+    color:transparent;
+    font-size:.7rem;
+    transition:color .2s var(--kfs-ease),background .2s var(--kfs-ease);
+  }
+  .kfs-option.type-single .kfs-mark{border-radius:50%;}
+  .kfs-option.is-selected .kfs-mark{background:var(--kfs-gold);color:var(--kfs-navy);}
+  .kfs-option .kfs-opt-label{font-size:.94rem;font-weight:500;}
+  .kfs-option .kfs-opt-desc{display:block;font-size:.8rem;color:var(--kfs-white-dim);font-weight:400;margin-top:.15rem;}
+  .kfs-field{
+    width:100%;
+    background:rgba(18,32,56,.5);
+    border:1px solid var(--kfs-line-soft);
+    color:var(--kfs-white);
+    font-family:var(--kfs-font-body);
+    font-size:.95rem;
+    padding:.85rem 1rem;
+    margin-bottom:1.5rem;
+    transition:border-color .25s var(--kfs-ease);
+  }
+  .kfs-field:focus{outline:none;border-color:var(--kfs-gold);}
+  .kfs-field::placeholder{color:rgba(245,242,234,.35);}
+  .kfs-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;}
+  .kfs-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:2.9rem;padding:0 1.4rem;
+    font-family:var(--kfs-font-body);font-size:.76rem;font-weight:600;
+    letter-spacing:.13em;text-transform:uppercase;
+    border:1px solid transparent;cursor:pointer;
+    transition:background .25s var(--kfs-ease),color .25s var(--kfs-ease),border-color .25s var(--kfs-ease),opacity .2s var(--kfs-ease);
+  }
+  .kfs-btn-gold{
+    background:linear-gradient(180deg,var(--kfs-gold-bright),var(--kfs-gold) 45%,var(--kfs-gold-deep));
+    color:var(--kfs-navy);
+  }
+  .kfs-btn-gold:disabled{opacity:.35;cursor:not-allowed;}
+  .kfs-btn-gold:not(:disabled):hover{filter:brightness(1.06);}
+  .kfs-btn-line{
+    background:transparent;border-color:rgba(201,164,59,.4);color:var(--kfs-white-dim);
+  }
+  .kfs-btn-line:hover{border-color:var(--kfs-gold-bright);color:var(--kfs-gold-bright);}
+  .kfs-btn-line:disabled{visibility:hidden;}
+  .kfs-summary{text-align:center;padding:1.5rem 0;}
+  .kfs-summary .kfs-mark-big{
+    width:3.2rem;height:3.2rem;border:1px solid var(--kfs-gold);margin:0 auto 1.25rem;
+    display:grid;place-items:center;color:var(--kfs-gold-bright);font-size:1.4rem;transform:rotate(45deg);
+  }
+  .kfs-summary .kfs-mark-big span{transform:rotate(-45deg);display:block;}
+  .kfs-summary h2{font-family:var(--kfs-font-display);font-size:clamp(1.6rem,3.6vw,2.2rem);margin-bottom:.6rem;}
+  .kfs-summary p{color:var(--kfs-white-dim);max-width:30rem;margin:0 auto 1.75rem;}
+  @media (prefers-reduced-motion: reduce){
+    .kfs-question{animation:none;opacity:1;transform:none;}
+    .kfs-progress-bar{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="kfs-shell">
+  <div class="kfs-card">
+    <div class="kfs-eyebrow">Project Enquiry</div>
+    <div class="kfs-step-label" id="kfsStepLabel">Step 1</div>
+    <div class="kfs-progress-track"><div class="kfs-progress-bar" id="kfsProgressBar"></div></div>
+    <div class="kfs-stage" id="kfsStage"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     1. SERVICE LIST — mirrors keithfount.co.ke/services.html
+  --------------------------------------------------------------- */
+  var SERVICES = [
+    { id:"design-build", label:"Design & Build", desc:"Interior design, exterior work and civil works, first plans to handover." },
+    { id:"landscaping", label:"Landscaping", desc:"Outdoor areas planned to suit the building." },
+    { id:"renovation", label:"Remodelling & Renovation", desc:"Updates that work with your structure, budget and daily life." },
+    { id:"contractor", label:"General Building Contractor", desc:"Foundations, structure and full project delivery." },
+    { id:"construction", label:"Building & Construction", desc:"Residential and commercial building with clear site management." },
+    { id:"consultancy", label:"Consultancy", desc:"Site supervision, building advice and cost estimates." }
+  ];
+
+  /* Two of the six services map onto the same underlying question
+     set because their information needs genuinely overlap (a full
+     contractor build and a construction project ask the same things
+     about stage, scope and site). Everything else gets its own set. */
+  var SERVICE_TO_SET = {
+    "design-build":"design-build",
+    "landscaping":"landscaping",
+    "renovation":"renovation",
+    "contractor":"construction",
+    "construction":"construction",
+    "consultancy":"consultancy"
+  };
+
+  /* ---------------------------------------------------------------
+     2. QUESTION SETS — one per underlying set above
+  --------------------------------------------------------------- */
+  var QUESTION_SETS = {
+
+    "design-build":[
+      { id:"db_type", type:"single", title:"What type of project is this?",
+        options:[
+          {v:"New build", l:"New build"},
+          {v:"Interior design", l:"Interior design"},
+          {v:"Exterior work", l:"Exterior work"},
+          {v:"Full design-to-build", l:"Full design-to-build"}
+        ]},
+      { id:"db_plans", type:"single", title:"Do you already have architectural plans?",
+        options:[
+          {v:"Yes, fully approved", l:"Yes, fully approved"},
+          {v:"Yes, partial or draft", l:"Yes, partial or draft"},
+          {v:"No, need design from scratch", l:"No, need design from scratch"}
+        ]},
+      { id:"db_size", type:"text", title:"What's the approximate size of the space?",
+        sub:"Rooms, square metres, or floors, whatever you have.", placeholder:"e.g. 4-bedroom, ~250 sqm" },
+      { id:"db_goal", type:"single", title:"What's driving this project?",
+        options:[
+          {v:"Need more space", l:"Need more space"},
+          {v:"Modern look and feel", l:"Modern look and feel"},
+          {v:"Better functionality", l:"Better functionality"},
+          {v:"Increasing property value", l:"Increasing property value"},
+          {v:"Other", l:"Other"}
+        ]}
+    ],
+
+    "renovation":[
+      { id:"rn_areas", type:"multi", title:"Which areas need work?",
+        sub:"Select all that apply.",
+        options:[
+          {v:"Kitchen", l:"Kitchen"},
+          {v:"Bathroom(s)", l:"Bathroom(s)"},
+          {v:"Full interior", l:"Full interior"},
+          {v:"Exterior / facade", l:"Exterior / facade"},
+          {v:"Roofing", l:"Roofing"},
+          {v:"Multiple areas", l:"Multiple areas"}
+        ]},
+      { id:"rn_condition", type:"single", title:"What condition is the current structure in?",
+        options:[
+          {v:"Good, cosmetic changes only", l:"Good, cosmetic changes only"},
+          {v:"Fair, some repairs needed", l:"Fair, some repairs needed"},
+          {v:"Poor, major work needed", l:"Poor, major work needed"}
+        ]},
+      { id:"rn_occupied", type:"single", title:"Will the property be occupied during the renovation?",
+        options:[
+          {v:"Yes, fully occupied", l:"Yes, fully occupied"},
+          {v:"Partially occupied", l:"Partially occupied"},
+          {v:"No, vacant during works", l:"No, vacant during works"}
+        ]},
+      { id:"rn_goal", type:"single", title:"What's driving this renovation?",
+        options:[
+          {v:"Wear and tear repairs", l:"Wear and tear repairs"},
+          {v:"Updating an outdated look", l:"Updating an outdated look"},
+          {v:"Preparing to sell or let", l:"Preparing to sell or let"},
+          {v:"Changing how the space is used", l:"Changing how the space is used"},
+          {v:"Other", l:"Other"}
+        ]}
+    ],
+
+    "landscaping":[
+      { id:"ls_size", type:"single", title:"What's the size of the outdoor area?",
+        options:[
+          {v:"Small courtyard or balcony", l:"Small courtyard or balcony"},
+          {v:"Medium garden or yard", l:"Medium garden or yard"},
+          {v:"Large residential compound", l:"Large residential compound"},
+          {v:"Commercial grounds", l:"Commercial grounds"}
+        ]},
+      { id:"ls_elements", type:"multi", title:"Which elements are you interested in?",
+        sub:"Select all that apply.",
+        options:[
+          {v:"Planting and gardens", l:"Planting and gardens"},
+          {v:"Paving and walkways", l:"Paving and walkways"},
+          {v:"Water features", l:"Water features"},
+          {v:"Outdoor lighting", l:"Outdoor lighting"},
+          {v:"Fencing and boundary walls", l:"Fencing and boundary walls"},
+          {v:"Full landscape design", l:"Full landscape design"}
+        ]},
+      { id:"ls_new", type:"single", title:"Is this a new outdoor space or an update to an existing one?",
+        options:[
+          {v:"New space, starting from bare ground", l:"New space, starting from bare ground"},
+          {v:"Update to an existing landscape", l:"Update to an existing landscape"}
+        ]},
+      { id:"ls_notes", type:"text", title:"Any site conditions we should know about?",
+        sub:"Slope, drainage, existing trees, soil type, anything relevant. Optional.",
+        optional:true, placeholder:"Optional — leave blank if not sure" }
+    ],
+
+    "construction":[
+      { id:"cn_use", type:"single", title:"Is this a residential or commercial project?",
+        options:[
+          {v:"Residential", l:"Residential"},
+          {v:"Commercial", l:"Commercial"},
+          {v:"Mixed use", l:"Mixed use"}
+        ]},
+      { id:"cn_stage", type:"single", title:"What stage is the project at?",
+        options:[
+          {v:"Land only, nothing started", l:"Land only, nothing started"},
+          {v:"Foundation started", l:"Foundation started"},
+          {v:"Partial structure in place", l:"Partial structure in place"},
+          {v:"Design complete, ready to build", l:"Design complete, ready to build"}
+        ]},
+      { id:"cn_scope", type:"single", title:"What scope of work do you need?",
+        options:[
+          {v:"Full construction, start to finish", l:"Full construction, start to finish"},
+          {v:"Structural work only", l:"Structural work only"},
+          {v:"Project management and supervision", l:"Project management and supervision"}
+        ]},
+      { id:"cn_size", type:"text", title:"What's the approximate size of the build?",
+        sub:"Square metres, number of floors, or units, whatever you have.", placeholder:"e.g. 3 floors, ~400 sqm" }
+    ],
+
+    "consultancy":[
+      { id:"cs_type", type:"single", title:"What kind of consultancy do you need?",
+        options:[
+          {v:"Site supervision", l:"Site supervision"},
+          {v:"Building advice", l:"Building advice"},
+          {v:"Cost estimation", l:"Cost estimation"},
+          {v:"Feasibility study", l:"Feasibility study"}
+        ]},
+      { id:"cs_stage", type:"single", title:"What stage is your project at?",
+        options:[
+          {v:"Planning, before any work starts", l:"Planning, before any work starts"},
+          {v:"Mid-construction", l:"Mid-construction"},
+          {v:"Post-construction issue to resolve", l:"Post-construction issue to resolve"}
+        ]},
+      { id:"cs_docs", type:"single", title:"Do you have existing drawings or reports?",
+        options:[
+          {v:"Yes", l:"Yes"},
+          {v:"No", l:"No"}
+        ]}
+    ]
+  };
+
+  /* ---------------------------------------------------------------
+     3. QUESTIONS COMMON TO EVERY SERVICE — asked last, once we know
+        what they need, so contact details feel earned, not upfront.
+  --------------------------------------------------------------- */
+  var COMMON_QUESTIONS = [
+    { id:"co_name", type:"text", title:"What's your name?", placeholder:"Full name" },
+    { id:"co_phone", type:"tel", title:"Best phone number to reach you on?", placeholder:"07xx xxx xxx" },
+    { id:"co_email", type:"email", title:"And your email address?", placeholder:"you@example.com" },
+    { id:"co_location", type:"text", title:"Where is the project located?", sub:"Town or area is fine.", placeholder:"e.g. Karen, Nairobi" },
+    { id:"co_timeline", type:"single", title:"When are you looking to start?",
+      options:[
+        {v:"As soon as possible", l:"As soon as possible"},
+        {v:"1-3 months", l:"1-3 months"},
+        {v:"3-6 months", l:"3-6 months"},
+        {v:"Just exploring for now", l:"Just exploring for now"}
+      ]},
+    { id:"co_budget", type:"single", title:"What's your approximate budget range?",
+      sub:"This just helps us scope the right proposal, an estimate is fine.",
+      options:[
+        {v:"Under KES 500,000", l:"Under KES 500,000"},
+        {v:"KES 500,000 - 1,000,000", l:"KES 500,000 - 1,000,000"},
+        {v:"KES 1,000,000 - 3,000,000", l:"KES 1,000,000 - 3,000,000"},
+        {v:"KES 3,000,000+", l:"KES 3,000,000+"},
+        {v:"Not sure yet", l:"Not sure yet"}
+      ]}
+  ];
+
+  /* ---------------------------------------------------------------
+     4. ENGINE
+  --------------------------------------------------------------- */
+  var serviceQuestion = {
+    id:"service", type:"single", title:"Which service are you interested in?",
+    sub:"Pick the one closest to what you need, the next questions will follow from it.",
+    options: SERVICES.map(function(s){ return {v:s.id, l:s.label, d:s.desc}; })
+  };
+
+  var answers = {};
+  window.kfsCollectedAnswers = answers; // exposed for wiring up a real backend
+  var flow = [serviceQuestion];         // rebuilt once service is picked
+  var current = 0;
+
+  var stageEl = document.getElementById("kfsStage");
+  var progressBar = document.getElementById("kfsProgressBar");
+  var stepLabel = document.getElementById("kfsStepLabel");
+
+  function buildFlowForService(serviceId){
+    var setKey = SERVICE_TO_SET[serviceId];
+    var serviceQs = QUESTION_SETS[setKey] || [];
+    flow = [serviceQuestion].concat(serviceQs, COMMON_QUESTIONS);
+  }
+
+  function renderProgress(){
+    var pct = Math.round((current / flow.length) * 100);
+    progressBar.style.width = pct + "%";
+    stepLabel.textContent = "Step " + (current + 1) + " of " + (flow.length + 1);
+  }
+
+  function renderQuestion(){
+    var q = flow[current];
+    renderProgress();
+    stageEl.innerHTML = "";
+
+    var wrap = document.createElement("div");
+    wrap.className = "kfs-question";
+
+    var h2 = document.createElement("h2");
+    h2.textContent = q.title;
+    wrap.appendChild(h2);
+
+    if (q.sub){
+      var sub = document.createElement("p");
+      sub.className = "kfs-sub";
+      sub.textContent = q.sub;
+      wrap.appendChild(sub);
+    }
+
+    var nextBtn = document.createElement("button");
+    nextBtn.className = "kfs-btn kfs-btn-gold";
+    nextBtn.type = "button";
+    nextBtn.textContent = (current === flow.length - 1) ? "Submit enquiry" : "Next";
+
+    function refreshNextState(){
+      var val = answers[q.id];
+      var answered;
+      if (q.type === "multi"){
+        answered = Array.isArray(val) && val.length > 0;
+      } else if (q.optional){
+        answered = true;
+      } else {
+        answered = val !== undefined && val !== null && String(val).trim() !== "";
+      }
+      nextBtn.disabled = !answered;
+    }
+
+    if (q.type === "single" || q.type === "multi"){
+      var optionsWrap = document.createElement("div");
+      optionsWrap.className = "kfs-options";
+
+      q.options.forEach(function(opt){
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "kfs-option type-" + q.type;
+
+        var mark = document.createElement("span");
+        mark.className = "kfs-mark";
+        mark.textContent = "✓";
+        btn.appendChild(mark);
+
+        var labelWrap = document.createElement("span");
+        var strong = document.createElement("span");
+        strong.className = "kfs-opt-label";
+        strong.textContent = opt.l;
+        labelWrap.appendChild(strong);
+        if (opt.d){
+          var descEl = document.createElement("span");
+          descEl.className = "kfs-opt-desc";
+          descEl.textContent = opt.d;
+          labelWrap.appendChild(descEl);
+        }
+        btn.appendChild(labelWrap);
+
+        function isSelected(){
+          if (q.type === "multi"){
+            return Array.isArray(answers[q.id]) && answers[q.id].indexOf(opt.v) > -1;
+          }
+          return answers[q.id] === opt.v;
+        }
+        function syncVisual(){
+          btn.classList.toggle("is-selected", isSelected());
+        }
+        syncVisual();
+
+        btn.addEventListener("click", function(){
+          if (q.type === "multi"){
+            var arr = Array.isArray(answers[q.id]) ? answers[q.id].slice() : [];
+            var idx = arr.indexOf(opt.v);
+            if (idx > -1){ arr.splice(idx,1); } else { arr.push(opt.v); }
+            answers[q.id] = arr;
+            optionsWrap.querySelectorAll(".kfs-option").forEach(function(el, i){
+              el.classList.toggle("is-selected", arr.indexOf(q.options[i].v) > -1);
+            });
+          } else {
+            answers[q.id] = opt.v;
+            optionsWrap.querySelectorAll(".kfs-option").forEach(function(el){
+              el.classList.remove("is-selected");
+            });
+            btn.classList.add("is-selected");
+            if (q.id === "service"){
+              buildFlowForService(opt.v);
+            }
+          }
+          refreshNextState();
+        });
+
+        optionsWrap.appendChild(btn);
+      });
+
+      wrap.appendChild(optionsWrap);
+    } else {
+      var input = document.createElement("input");
+      input.className = "kfs-field";
+      input.type = q.type === "tel" ? "tel" : (q.type === "email" ? "email" : "text");
+      input.placeholder = q.placeholder || "";
+      input.value = answers[q.id] || "";
+      input.addEventListener("input", function(){
+        answers[q.id] = input.value;
+        refreshNextState();
+      });
+      wrap.appendChild(input);
+      setTimeout(function(){ input.focus(); }, 60);
+    }
+
+    var nav = document.createElement("div");
+    nav.className = "kfs-nav";
+
+    var backBtn = document.createElement("button");
+    backBtn.className = "kfs-btn kfs-btn-line";
+    backBtn.type = "button";
+    backBtn.textContent = "Back";
+    backBtn.disabled = current === 0;
+    backBtn.addEventListener("click", function(){
+      if (current > 0){ current -= 1; renderQuestion(); }
+    });
+
+    nextBtn.addEventListener("click", function(){
+      if (current === flow.length - 1){
+        submitSurvey();
+      } else {
+        current += 1;
+        renderQuestion();
+      }
+    });
+
+    refreshNextState();
+    nav.appendChild(backBtn);
+    nav.appendChild(nextBtn);
+    wrap.appendChild(nav);
+
+    stageEl.appendChild(wrap);
+  }
+
+  function submitSurvey(){
+    /* TODO: send `answers` to your backend / CRM / email service, e.g.
+       fetch("https://your-endpoint.example.com/enquiries", {
+         method:"POST",
+         headers:{"Content-Type":"application/json"},
+         body: JSON.stringify(answers)
+       });
+    */
+    console.log("Keith Fount survey submission:", answers);
+
+    progressBar.style.width = "100%";
+    stepLabel.textContent = "Complete";
+    stageEl.innerHTML = "";
+
+    var summary = document.createElement("div");
+    summary.className = "kfs-summary";
+    summary.innerHTML =
+      '<div class="kfs-mark-big"><span>✓</span></div>' +
+      '<h2>Thank you, ' + (answers.co_name ? escapeHtml(answers.co_name.split(" ")[0]) : "there") + '.</h2>' +
+      '<p>We\u2019ve received your project details. Our team will review them and reach out on ' +
+      (answers.co_phone ? escapeHtml(answers.co_phone) : "the contact you provided") +
+      ' shortly to discuss next steps.</p>';
+    stageEl.appendChild(summary);
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  renderQuestion();
+})();
+</script>
+
+</body>
+</html>
