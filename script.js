@@ -8,7 +8,6 @@ const targetYear = 2019;
 document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = String(targetYear);
 });
-
 if (page && nav) {
   nav.querySelectorAll("[data-nav]").forEach((link) => {
     if (link.dataset.nav === page) {
