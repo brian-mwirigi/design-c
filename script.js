@@ -97,14 +97,14 @@ const SERVICE_GALLERIES = {
     title: "Design & Build",
     images: [
       { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80", alt: "Construction site works" },
-      { src: "media/projects/civil-works/cover.jpg", alt: "Civil works on site" },
-      { src: "media/projects/residential-build/cover.jpg", alt: "Residential build in progress" },
+      { src: "/media/projects/civil-works/cover.jpg", alt: "Civil works on site" },
+      { src: "/media/projects/residential-build/cover.jpg", alt: "Residential build in progress" },
     ],
   },
   landscaping: {
     title: "Landscaping",
     images: [
-      { src: "media/projects/landscaping/cover.jpg", alt: "Landscaping project" },
+      { src: "/media/projects/landscaping/cover.jpg", alt: "Landscaping project" },
       { src: "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1600&q=80", alt: "Garden and outdoor space" },
       { src: "https://images.unsplash.com/photo-1598904327874-098494c07030?auto=format&fit=crop&w=1600&q=80", alt: "Landscape design detail" },
     ],
@@ -112,8 +112,8 @@ const SERVICE_GALLERIES = {
   renovation: {
     title: "Remodelling & Renovation",
     images: [
-      { src: "media/projects/renovation/01.jpg", alt: "Renovation works in progress" },
-      { src: "media/projects/renovation/02.jpg", alt: "Interior remodel detail" },
+      { src: "/media/projects/renovation/01.jpg", alt: "Renovation works in progress" },
+      { src: "/media/projects/renovation/02.jpg", alt: "Interior remodel detail" },
       { src: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80", alt: "Renovated living space" },
     ],
   },
@@ -121,15 +121,15 @@ const SERVICE_GALLERIES = {
     title: "General Building Contractor",
     images: [
       { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80", alt: "Structural building works" },
-      { src: "media/projects/residential-build/01.jpg", alt: "Site execution and masonry" },
-      { src: "media/projects/civil-works/cover.jpg", alt: "Foundation and civil works" },
+      { src: "/media/projects/residential-build/01.jpg", alt: "Site execution and masonry" },
+      { src: "/media/projects/civil-works/cover.jpg", alt: "Foundation and civil works" },
     ],
   },
   construction: {
     title: "Building & Construction",
     images: [
-      { src: "media/projects/residential-build/cover.jpg", alt: "Residential construction" },
-      { src: "media/projects/residential-build/01.jpg", alt: "Building progress on site" },
+      { src: "/media/projects/residential-build/cover.jpg", alt: "Residential construction" },
+      { src: "/media/projects/residential-build/01.jpg", alt: "Building progress on site" },
       { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80", alt: "Commercial building facade" },
     ],
   },

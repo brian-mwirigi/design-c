@@ -1,0 +1,24 @@
+Options -Indexes
+RewriteEngine On
+
+# Force HTTPS (enable on production host)
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect legacy .html URLs to clean folders
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^about\.html$ /about/ [R=301,L]
+RewriteRule ^contact\.html$ /contact/ [R=301,L]
+RewriteRule ^services\.html$ /services/ [R=301,L]
+RewriteRule ^projects\.html$ /projects/ [R=301,L]
+RewriteRule ^craft\.html$ /craft/ [R=301,L]
+RewriteRule ^survey\.html$ /contact/#survey [R=301,NE,L]
+
+# Serve directory indexes without showing index.html
+DirectoryIndex index.html
+
+# Security / SEO headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
