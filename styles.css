@@ -1006,12 +1006,20 @@ p {
   display: none;
 }
 
-.project-copy {
-  padding: clamp(1.35rem, 3vw, 2.1rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.project-copy .btn {
+  margin-top: 1.1rem;
+  align-self: flex-start;
 }
+
+.project[data-project] {
+  cursor: pointer;
+}
+
+.project[data-project]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 
 .project-copy p {
   color: var(--white-dim);

@@ -98,8 +98,10 @@ const SERVICE_GALLERIES = {
     title: "Design & Build",
     images: [
       { src: "/media/site/services-lead.jpg", alt: "Keith Fount residential build" },
-      { src: "/media/projects/residential-build/cover.jpg", alt: "Project 1 finished exterior" },
+      { src: "/media/projects/project-1/cover.jpg", alt: "Project 1 finished exterior" },
       { src: "/media/projects/kitale-bungalow/cover.jpg", alt: "Kitale bungalow build" },
+      { src: "/media/projects/kisii/cover.jpg", alt: "Kisii residential build" },
+      { src: "/media/projects/project-7/cover.jpg", alt: "Project 7 exterior" },
     ],
   },
   landscaping: {
@@ -116,36 +118,195 @@ const SERVICE_GALLERIES = {
       { src: "/media/projects/renovation/01.jpg", alt: "Kitengela renovations after" },
       { src: "/media/projects/renovation/02.jpg", alt: "Kitengela interior finish" },
       { src: "/media/projects/renovation/03.jpg", alt: "Kitengela works in progress" },
+      { src: "/media/projects/renovation/04.jpg", alt: "Kitengela renovation detail" },
+      { src: "/media/projects/renovation/05.jpg", alt: "Kitengela renovation progress" },
+      { src: "/media/projects/renovation/06.jpg", alt: "Kitengela finished area" },
     ],
   },
   "general-contractor": {
     title: "General Building Contractor",
     images: [
       { src: "/media/projects/civil-works/cover.jpg", alt: "Structural works on site" },
-      { src: "/media/projects/residential-build/01.jpg", alt: "Residential build progress" },
+      { src: "/media/projects/project-1/02.jpg", alt: "Residential build progress" },
       { src: "/media/projects/civil-works/01.jpg", alt: "Site construction stage" },
+      { src: "/media/projects/kitale/01.jpg", alt: "Kitale construction photo" },
+      { src: "/media/projects/project-7/01.jpg", alt: "Project 7 site works" },
     ],
   },
   construction: {
     title: "Building & Construction",
     images: [
-      { src: "/media/projects/residential-build/cover.jpg", alt: "Residential construction" },
+      { src: "/media/projects/project-1/cover.jpg", alt: "Residential construction" },
       { src: "/media/projects/kisii/cover.jpg", alt: "Kisii 2 bedroom home" },
       { src: "/media/projects/kitale/cover.jpg", alt: "Kitale completed works" },
+      { src: "/media/projects/kitale-bungalow/cover.jpg", alt: "Kitale bungalow" },
+      { src: "/media/projects/project-7/cover.jpg", alt: "Project 7 completed works" },
     ],
   },
   consultancy: {
     title: "Consultancy",
     images: [
-      { src: "/media/projects/consultancy/01.jpg", alt: "Site finishing review" },
-      { src: "/media/projects/consultancy/02.jpg", alt: "Works in progress" },
-      { src: "/media/projects/consultancy/03.jpg", alt: "On-site project guidance" },
+      { src: "/media/projects/project-5/01.jpg", alt: "Site finishing review" },
+      { src: "/media/projects/project-5/02.jpg", alt: "Works in progress" },
+      { src: "/media/projects/project-5/03.jpg", alt: "On-site project guidance" },
+      { src: "/media/projects/project-5/04.jpg", alt: "Interior consultancy photo" },
+      { src: "/media/projects/project-5/05.jpg", alt: "Finishing detail" },
+    ],
+  },
+};
+
+const PROJECT_GALLERIES = {
+  "project-1": {
+    title: "Project 1",
+    images: [
+      { src: "/media/projects/project-1/01.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/02.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/03.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/04.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/05.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/06.jpg", alt: "Project 1 photo" },
+      { src: "/media/projects/project-1/07.jpg", alt: "Project 1 photo" },
+    ],
+  },
+  "renovation": {
+    title: "Kitengela renovations",
+    images: [
+      { src: "/media/projects/renovation/01.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/02.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/03.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/04.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/05.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/06.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/07.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/08.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/09.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/10.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/11.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/12.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/13.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/14.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/15.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/16.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/17.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/18.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/19.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/20.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/21.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/22.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/23.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/24.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/25.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/26.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/27.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/28.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/29.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/30.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/31.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/32.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/33.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/34.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/35.jpg", alt: "Kitengela renovations photo" },
+      { src: "/media/projects/renovation/36.jpg", alt: "Kitengela renovations photo" },
+    ],
+  },
+  "kisii": {
+    title: "Kisii 2 bedroom",
+    images: [
+      { src: "/media/projects/kisii/01.jpg", alt: "Kisii 2 bedroom photo" },
+      { src: "/media/projects/kisii/02.jpg", alt: "Kisii 2 bedroom photo" },
+      { src: "/media/projects/kisii/03.jpg", alt: "Kisii 2 bedroom photo" },
+      { src: "/media/projects/kisii/04.jpg", alt: "Kisii 2 bedroom photo" },
+      { src: "/media/projects/kisii/05.jpg", alt: "Kisii 2 bedroom photo" },
+      { src: "/media/projects/kisii/06.jpg", alt: "Kisii 2 bedroom photo" },
+    ],
+  },
+  "kitale": {
+    title: "Kitale",
+    images: [
+      { src: "/media/projects/kitale/01.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/02.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/03.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/04.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/05.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/06.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/07.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/08.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/09.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/10.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/11.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/12.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/13.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/14.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/15.jpg", alt: "Kitale photo" },
+      { src: "/media/projects/kitale/16.jpg", alt: "Kitale photo" },
+    ],
+  },
+  "project-5": {
+    title: "Project 5",
+    images: [
+      { src: "/media/projects/project-5/01.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/02.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/03.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/04.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/05.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/06.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/07.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/08.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/09.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/10.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/11.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/12.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/13.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/14.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/15.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/16.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/17.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/18.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/19.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/20.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/21.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/22.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/23.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/24.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/25.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/26.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/27.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/28.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/29.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/30.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/31.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/32.jpg", alt: "Project 5 photo" },
+      { src: "/media/projects/project-5/33.jpg", alt: "Project 5 photo" },
+    ],
+  },
+  "kitale-bungalow": {
+    title: "5 bedroom bungalow, Kitale",
+    images: [
+      { src: "/media/projects/kitale-bungalow/01.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+      { src: "/media/projects/kitale-bungalow/02.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+      { src: "/media/projects/kitale-bungalow/03.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+      { src: "/media/projects/kitale-bungalow/04.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+      { src: "/media/projects/kitale-bungalow/05.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+      { src: "/media/projects/kitale-bungalow/06.jpg", alt: "5 bedroom bungalow, Kitale photo" },
+    ],
+  },
+  "project-7": {
+    title: "Project 7",
+    images: [
+      { src: "/media/projects/project-7/01.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/02.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/03.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/04.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/05.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/06.jpg", alt: "Project 7 photo" },
+      { src: "/media/projects/project-7/07.jpg", alt: "Project 7 photo" },
     ],
   },
 };
 
 const serviceTriggers = document.querySelectorAll("[data-service]");
-if (serviceTriggers.length) {
+const projectTriggers = document.querySelectorAll("[data-project]");
+if (serviceTriggers.length || projectTriggers.length) {
   const lightbox = document.createElement("div");
   lightbox.className = "service-lightbox";
   lightbox.hidden = true;
@@ -202,6 +363,11 @@ if (serviceTriggers.length) {
 
   const buildDots = () => {
     dotsEl.innerHTML = "";
+    if (gallery.length > 12) {
+      dotsEl.hidden = true;
+      return;
+    }
+    dotsEl.hidden = false;
     gallery.forEach((_, i) => {
       const dot = document.createElement("button");
       dot.type = "button";
@@ -222,11 +388,10 @@ if (serviceTriggers.length) {
     if (lastFocus) lastFocus.focus();
   };
 
-  const openLightbox = (key) => {
-    const data = SERVICE_GALLERIES[key];
+  const openLightbox = (data, startIndex = 0) => {
     if (!data?.images?.length) return;
     gallery = data.images;
-    index = 0;
+    index = Math.max(0, Math.min(startIndex, gallery.length - 1));
     titleEl.textContent = data.title;
     buildDots();
     renderSlide();
@@ -238,12 +403,33 @@ if (serviceTriggers.length) {
   };
 
   serviceTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => openLightbox(trigger.dataset.service));
+    trigger.addEventListener("click", () => openLightbox(SERVICE_GALLERIES[trigger.dataset.service]));
     trigger.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        openLightbox(trigger.dataset.service);
+        openLightbox(SERVICE_GALLERIES[trigger.dataset.service]);
       }
+    });
+  });
+
+  projectTriggers.forEach((trigger) => {
+    const open = (start = 0) => openLightbox(PROJECT_GALLERIES[trigger.dataset.project], start);
+    trigger.addEventListener("click", (event) => {
+      if (event.target.closest(".play-btn, video, button:not([data-project-open])")) return;
+      const thumb = event.target.closest("[data-gallery-index]");
+      open(thumb ? Number(thumb.dataset.galleryIndex) : 0);
+    });
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open(0);
+      }
+    });
+    trigger.querySelectorAll("[data-project-open]").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        open(0);
+      });
     });
   });
 
