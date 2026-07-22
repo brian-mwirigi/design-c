@@ -807,3 +807,72 @@ if (serviceTriggers.length) {
 
   renderQuestion();
 })();
+
+/* Before / after comparison sliders */
+(function () {
+  const sliders = document.querySelectorAll("[data-ba]");
+  if (!sliders.length) return;
+
+  const setPos = (slider, percent) => {
+    const clamped = Math.min(100, Math.max(0, percent));
+    const pane = slider.querySelector(".ba-before-pane");
+    const handle = slider.querySelector(".ba-handle");
+    if (!pane || !handle) return;
+    pane.style.width = clamped + "%";
+    handle.style.left = clamped + "%";
+  };
+
+  const syncWidths = () => {
+    sliders.forEach((slider) => {
+      const beforeImg = slider.querySelector(".ba-img-before");
+      if (beforeImg) beforeImg.style.width = slider.offsetWidth + "px";
+    });
+  };
+
+  syncWidths();
+  window.addEventListener("resize", syncWidths);
+
+  sliders.forEach((slider) => {
+    let dragging = false;
+
+    const move = (clientX) => {
+      const rect = slider.getBoundingClientRect();
+      if (!rect.width) return;
+      setPos(slider, ((clientX - rect.left) / rect.width) * 100);
+    };
+
+    const start = (clientX) => {
+      dragging = true;
+      move(clientX);
+    };
+    const end = () => {
+      dragging = false;
+    };
+
+    slider.addEventListener("pointerdown", (event) => {
+      slider.setPointerCapture(event.pointerId);
+      start(event.clientX);
+    });
+    slider.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      move(event.clientX);
+    });
+    slider.addEventListener("pointerup", end);
+    slider.addEventListener("pointercancel", end);
+
+    const handle = slider.querySelector(".ba-handle");
+    if (handle) {
+      handle.addEventListener("keydown", (event) => {
+        const current = parseFloat(handle.style.left) || 50;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          setPos(slider, current - 3);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          setPos(slider, current + 3);
+        }
+      });
+    }
+  });
+})();
