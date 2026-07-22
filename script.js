@@ -96,49 +96,49 @@ const SERVICE_GALLERIES = {
   "design-build": {
     title: "Design & Build",
     images: [
-      { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80", alt: "Construction site works" },
-      { src: "/media/projects/civil-works/cover.jpg", alt: "Civil works on site" },
-      { src: "/media/projects/residential-build/cover.jpg", alt: "Residential build in progress" },
+      { src: "/media/site/services-lead.jpg", alt: "Keith Fount residential build" },
+      { src: "/media/projects/residential-build/cover.jpg", alt: "Project 1 finished exterior" },
+      { src: "/media/projects/kitale-bungalow/cover.jpg", alt: "Kitale bungalow build" },
     ],
   },
   landscaping: {
     title: "Landscaping",
     images: [
-      { src: "/media/projects/landscaping/cover.jpg", alt: "Landscaping project" },
-      { src: "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1600&q=80", alt: "Garden and outdoor space" },
-      { src: "https://images.unsplash.com/photo-1598904327874-098494c07030?auto=format&fit=crop&w=1600&q=80", alt: "Landscape design detail" },
+      { src: "/media/projects/landscaping/cover.jpg", alt: "Outdoor site works" },
+      { src: "/media/projects/landscaping/01.jpg", alt: "Site surroundings" },
+      { src: "/media/projects/landscaping/02.jpg", alt: "Completed property exterior" },
     ],
   },
   renovation: {
     title: "Remodelling & Renovation",
     images: [
-      { src: "/media/projects/renovation/01.jpg", alt: "Renovation works in progress" },
-      { src: "/media/projects/renovation/02.jpg", alt: "Interior remodel detail" },
-      { src: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80", alt: "Renovated living space" },
+      { src: "/media/projects/renovation/01.jpg", alt: "Kitengela renovations after" },
+      { src: "/media/projects/renovation/02.jpg", alt: "Kitengela interior finish" },
+      { src: "/media/projects/renovation/03.jpg", alt: "Kitengela works in progress" },
     ],
   },
   "general-contractor": {
     title: "General Building Contractor",
     images: [
-      { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80", alt: "Structural building works" },
-      { src: "/media/projects/residential-build/01.jpg", alt: "Site execution and masonry" },
-      { src: "/media/projects/civil-works/cover.jpg", alt: "Foundation and civil works" },
+      { src: "/media/projects/civil-works/cover.jpg", alt: "Structural works on site" },
+      { src: "/media/projects/residential-build/01.jpg", alt: "Residential build progress" },
+      { src: "/media/projects/civil-works/01.jpg", alt: "Site construction stage" },
     ],
   },
   construction: {
     title: "Building & Construction",
     images: [
       { src: "/media/projects/residential-build/cover.jpg", alt: "Residential construction" },
-      { src: "/media/projects/residential-build/01.jpg", alt: "Building progress on site" },
-      { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80", alt: "Commercial building facade" },
+      { src: "/media/projects/kisii/cover.jpg", alt: "Kisii 2 bedroom home" },
+      { src: "/media/projects/kitale/cover.jpg", alt: "Kitale completed works" },
     ],
   },
   consultancy: {
     title: "Consultancy",
     images: [
-      { src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80", alt: "Construction planning and advice" },
-      { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80", alt: "Architectural drawings review" },
-      { src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80", alt: "Site supervision and inspection" },
+      { src: "/media/projects/consultancy/01.jpg", alt: "Site finishing review" },
+      { src: "/media/projects/consultancy/02.jpg", alt: "Works in progress" },
+      { src: "/media/projects/consultancy/03.jpg", alt: "On-site project guidance" },
     ],
   },
 };
