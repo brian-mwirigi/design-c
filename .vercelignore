@@ -1,0 +1,6 @@
+Keith Fount
+.git
+*.md
+.env
+.env.*
+!/.env.example
