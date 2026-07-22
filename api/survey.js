@@ -42,7 +42,7 @@ export default async function handler(req, res) {
       },
     });
 
-    const recipient = process.env.SMTP_TO || process.env.SMTP_FROM || process.env.SMTP_USER || 'keithfountsolutions@gmail.com';
+    const recipient = process.env.SMTP_TO || 'keithfountsolutionslimited@gmail.com';
 
     const info = await transporter.sendMail({
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
