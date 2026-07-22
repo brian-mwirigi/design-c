@@ -67,7 +67,9 @@
     <meta name="twitter:image" content="https://www.keithfount.co.ke/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
     <link rel="stylesheet" href="/styles.css" />
         <script type="application/ld+json">
 {
@@ -232,9 +234,12 @@
       <section class="hero">
         <div class="hero-bg" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=80"
-            alt="Nairobi skyline construction and architecture" width="2200"
-            height="1400"
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=70"
+            alt="Nairobi skyline construction and architecture"
+            width="1600"
+            height="1000"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
         <div class="wrap hero-inner">
@@ -281,6 +286,10 @@
               <img
                 src="/media/site/services-lead.jpg"
                 alt="Keith Fount residential build on site"
+                width="1200"
+                height="800"
+                loading="lazy" decoding="async"
+                decoding="async"
               />
               <div class="copy">
                 <span class="idx" style="color: var(--gold); letter-spacing: 0.14em; font-family: var(--font-serif); font-size: 0.85rem; text-transform: uppercase">01</span>
@@ -338,14 +347,14 @@
                   class="ba-img ba-img-after"
                   src="/media/before-after/kitengela-after.jpg"
                   alt="Kitengela renovations after completion"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
                 <div class="ba-before-pane" style="width: 50%">
                   <img
                     class="ba-img ba-img-before"
                     src="/media/before-after/kitengela-before.jpg"
                     alt="Kitengela renovations before work"
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                   />
                 </div>
                 <button class="ba-handle" type="button" aria-label="Drag to compare before and after" style="left: 50%">
@@ -363,14 +372,14 @@
                   class="ba-img ba-img-after"
                   src="/media/before-after/project-1-after.jpg"
                   alt="Project 1 finished exterior"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
                 <div class="ba-before-pane" style="width: 50%">
                   <img
                     class="ba-img ba-img-before"
                     src="/media/before-after/project-1-before.jpg"
                     alt="Project 1 exterior during construction"
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                   />
                 </div>
                 <button class="ba-handle" type="button" aria-label="Drag to compare before and after" style="left: 50%">
@@ -389,14 +398,14 @@
                   class="ba-img ba-img-after"
                   src="/media/before-after/project-5-after.jpg"
                   alt="Project 5 finished interior"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
                 <div class="ba-before-pane" style="width: 50%">
                   <img
                     class="ba-img ba-img-before"
                     src="/media/before-after/project-5-before.jpg"
                     alt="Project 5 interior before finishing"
-                    loading="lazy"
+                    loading="lazy" decoding="async"
                   />
                 </div>
                 <button class="ba-handle" type="button" aria-label="Drag to compare before and after" style="left: 50%">
@@ -422,6 +431,10 @@
             <img
               src="/media/site/full-delivery.jpg"
               alt="Finished Keith Fount renovation interior"
+              width="1200"
+              height="800"
+              loading="lazy" decoding="async"
+              decoding="async"
             />
           </div>
           <div>
@@ -469,6 +482,10 @@
             <img
               src="/media/site/who-we-are.jpg"
               alt="Keith Fount construction site in progress"
+              width="1200"
+              height="800"
+              loading="lazy" decoding="async"
+              decoding="async"
             />
           </div>
         </div>
@@ -556,10 +573,10 @@
             <a href="/contact/">Project enquiry</a>
           </div>
         </div>
-        <p class="footer-meta">&copy; <span data-year></span> Keith Fount Solutions Ltd · Registered limited company</p>
+        <p class="footer-meta">&copy; <span data-year></span> Keith Fount Solutions Ltd Â· Registered limited company</p>
       </div>
     </footer>
 
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
   </body>
 </html>

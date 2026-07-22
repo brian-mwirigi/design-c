@@ -48,6 +48,16 @@ img,
 video {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+.band {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
+.hero {
+  content-visibility: visible;
 }
 
 a {

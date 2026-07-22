@@ -66,7 +66,9 @@
     <meta name="twitter:image" content="https://www.keithfount.co.ke/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
     <link rel="stylesheet" href="/styles.css" />
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Service","name":"Timber Flooring and Finishes","provider":{"@id":"https://www.keithfount.co.ke/#organization"},"areaServed":"Kenya","url":"https://www.keithfount.co.ke/craft/","description":"Premium timber flooring measured, fitted and finished on site for homes and commercial spaces."}
@@ -117,7 +119,7 @@
       <section class="band">
         <div class="wrap split reveal">
           <div class="split-media">
-            <img src="/media/site/flooring.jpg" alt="Premium timber flooring installed by Keith Fount" />
+            <img src="/media/site/flooring.jpg" alt="Premium timber flooring installed by Keith Fount" width="1200" height="800" loading="lazy" decoding="async" />
           </div>
           <div>
             <p class="gold-rule" style="justify-content: flex-start">Craft</p>
@@ -153,6 +155,6 @@
         <p class="footer-meta">&copy; <span data-year></span> Keith Fount Solutions Ltd</p>
       </div>
     </footer>
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
   </body>
 </html>

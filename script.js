@@ -80,9 +80,10 @@ document.querySelectorAll(".slot video").forEach((video) => {
   video.addEventListener("error", fail);
   const source = video.querySelector("source");
   if (source) source.addEventListener("error", fail);
-  video.load();
+  video.preload = "none";
   btn.addEventListener("click", async () => {
     try {
+      if (video.readyState === 0) video.load();
       video.setAttribute("controls", "");
       slot.classList.add("playing");
       await video.play();
@@ -501,7 +502,7 @@ if (serviceTriggers.length) {
         title: "Any site conditions we should know about?",
         sub: "Slope, drainage, existing trees, soil type, anything relevant. Optional.",
         optional: true,
-        placeholder: "Optional � leave blank if not sure",
+        placeholder: "Optional: leave blank if not sure",
       },
     ],
     construction: [
