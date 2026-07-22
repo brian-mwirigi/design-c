@@ -1,0 +1,13 @@
+{
+  "name": "design-c-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "nodemailer": "^7.0.1"
+  }
+}

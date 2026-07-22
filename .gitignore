@@ -1,2 +1,17 @@
 # Raw client photo dump (curated copies live in /media)
 Keith Fount/
+
+# Node dependencies
+node_modules/
+
+# Local environment files
+.env
+.env.local
+.env.*
+!.env.example
+
+# Logs and OS clutter
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store

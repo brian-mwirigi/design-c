@@ -497,9 +497,21 @@ if (serviceTriggers.length || projectTriggers.length) {
 
   if (location.hash === "#survey") setTab("survey");
 
+  const getApiUrl = (path) => {
+    const isLocalStaticPreview = window.location.port === "5500";
+    return isLocalStaticPreview ? `http://127.0.0.1:3000${path}` : path;
+  };
+
   const quoteForm = document.getElementById("quoteForm");
   if (quoteForm) {
-    quoteForm.addEventListener("submit", (event) => {
+    const statusEl = document.getElementById("quoteFormStatus");
+    const setQuoteStatus = (message, isError = false) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.classList.toggle("is-error", isError);
+    };
+
+    quoteForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(quoteForm);
       const name = String(data.get("name") || "").trim();
@@ -514,22 +526,42 @@ if (serviceTriggers.length || projectTriggers.length) {
         return;
       }
 
-      const subject = encodeURIComponent("Project enquiry ? " + interest);
-      const body = encodeURIComponent(
-        [
-          "Name: " + name,
-          "Phone: " + phone,
-          "Email: " + email,
-          company ? "Company: " + company : null,
-          "Interested in: " + interest,
-          "",
-          message,
-        ]
-          .filter(Boolean)
-          .join("\n")
-      );
-      window.location.href =
-        "mailto:keithfountsolutions@gmail.com?subject=" + subject + "&body=" + body;
+      const subject = "Project enquiry: " + interest;
+      const body = [
+        "Name: " + name,
+        "Phone: " + phone,
+        "Email: " + email,
+        company ? "Company: " + company : null,
+        "Interested in: " + interest,
+        "",
+        message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      setQuoteStatus("Sending your message…", false);
+
+      try {
+        const response = await fetch(getApiUrl("/api/contact"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, phone, email, company, interest, message }),
+        });
+
+        const result = await response.json().catch(() => null);
+        if (!response.ok) throw new Error(result?.error || "Unable to send message.");
+
+        setQuoteStatus("Thanks! Your message has been sent.", false);
+        quoteForm.reset();
+      } catch (error) {
+        console.error(error);
+        setQuoteStatus("The message could not be sent directly. Please email keithfountsolutions@gmail.com.", true);
+        window.location.href =
+          "mailto:keithfountsolutions@gmail.com?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(body);
+      }
     });
   }
 
@@ -833,7 +865,7 @@ if (serviceTriggers.length || projectTriggers.length) {
     stepLabel.textContent = "Step " + (current + 1) + " of " + (flow.length + 1);
   };
 
-  const submitSurvey = () => {
+  const submitSurvey = async () => {
     console.log("Keith Fount survey submission:", answers);
     progressBar.style.width = "100%";
     stepLabel.textContent = "Complete";
@@ -849,6 +881,29 @@ if (serviceTriggers.length || projectTriggers.length) {
       (answers.co_phone ? escapeHtml(answers.co_phone) : "the contact you provided") +
       " shortly to discuss next steps.</p>";
     stageEl.appendChild(summary);
+
+    try {
+      const response = await fetch(getApiUrl("/api/survey"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers }),
+      });
+      if (!response.ok) throw new Error("Unable to send the survey response.");
+    } catch (error) {
+      console.error(error);
+      const note = document.createElement("p");
+      note.className = "kfs-sub";
+      note.textContent = "Your enquiry details were received locally, but the email delivery could not be completed automatically.";
+      summary.appendChild(note);
+    }
+  };
+
+  const goToNextQuestion = () => {
+    if (current === flow.length - 1) submitSurvey();
+    else {
+      current += 1;
+      renderQuestion();
+    }
   };
 
   const renderQuestion = () => {
@@ -940,6 +995,9 @@ if (serviceTriggers.length || projectTriggers.length) {
             });
             btn.classList.add("is-selected");
             if (q.id === "service") buildFlowForService(opt.v);
+            setTimeout(() => {
+              goToNextQuestion();
+            }, 120);
           }
           refreshNextState();
         });
@@ -977,13 +1035,7 @@ if (serviceTriggers.length || projectTriggers.length) {
       }
     });
 
-    nextBtn.addEventListener("click", () => {
-      if (current === flow.length - 1) submitSurvey();
-      else {
-        current += 1;
-        renderQuestion();
-      }
-    });
+    nextBtn.addEventListener("click", goToNextQuestion);
 
     refreshNextState();
     nav.appendChild(backBtn);
