@@ -9,7 +9,7 @@ document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = String(targetYear);
 });
 if (page && nav) {
-  nav.querySelectorAll("[data-nav]").forEach((link) => {
+ nav.querySelectorAll("[data-nav]").forEach((link) => {
     if (link.dataset.nav === page) {
       link.classList.add("is-active");
       link.setAttribute("aria-current", "page");
