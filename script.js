@@ -4,7 +4,6 @@ const nav = document.querySelector(".site-nav");
 const toggle = document.querySelector(".nav-toggle");
 
 const targetYear = 2019;
-
 document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = String(targetYear);
 });
